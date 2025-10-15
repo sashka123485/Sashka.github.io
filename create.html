@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Mod - Полное руководство по крафтам и механизмам</title>
+    <meta name="description" content="Исчерпывающее руководство по крафтам мода Create и его аддонов. Механизмы, автоматизация и инженерия в Minecraft.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to bottom, #2c3e50, #34495e);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect fill="%232c3e50" width="50" height="50"/><rect fill="%232c3e50" x="50" y="50" width="50" height="50"/><rect fill="%2334495e" x="50" width="50" height="50"/><rect fill="%2334495e" y="50" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 0 #1a1a1a;
+            color: #fff;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        nav {
+            background-color: #2d2d2d;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a:focus {
+            background-color: #2c3e50;
+            color: white;
+            outline: 2px solid #3498db;
+        }
+        
+        /* Контейнер для ссылок на другие сайты */
+        .site-links {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .site-link {
+            background: linear-gradient(135deg, #7ed957, #3a7d34);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 0 #2d5c29;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .site-link.secondary {
+            background: linear-gradient(135deg, #e6c8a0, #5a3921);
+            box-shadow: 0 4px 0 #7a5c3c;
+        }
+        
+        .site-link:hover, .site-link:focus {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0;
+            outline: 2px solid #fff;
+        }
+        
+        .site-link.secondary:hover {
+            background: linear-gradient(135deg, #5a3921, #e6c8a0);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background-color: #2d2d2d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            color: #3498db;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2c3e50;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .craft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .craft-card {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #34495e;
+        }
+        
+        .craft-card:hover, .craft-card:focus-within {
+            transform: translateY(-5px);
+            border-color: #3498db;
+        }
+        
+        .craft-image {
+            height: 200px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #3498db;
+        }
+        
+        .craft-content {
+            padding: 1.5rem;
+        }
+        
+        .craft-content h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #1a1a1a;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 #2980b9;
+            margin-top: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .resource-button:hover, .resource-button:focus {
+            background-color: #2980b9;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #2980b9;
+            outline: 2px solid #fff;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .featured-resource {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .featured-resource h3 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .site-links {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        .resource-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .resource-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-list a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-list a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .craft-ingredients {
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        .craft-steps {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .craft-steps li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-content">
+            <h1>CREATE MOD</h1>
+            <p class="tagline">Полное руководство по крафтам и механизмам</p>
+        </div>
+    </header>
+    
+    <!-- Навигация -->
+    <nav>
+        <ul>
+            <li><a href="#basic-crafts">Базовые крафты</a></li>
+            <li><a href="#kinetic-crafts">Кинетические механизмы</a></li>
+            <li><a href="#addon-crafts">Крафты аддонов</a></li>
+            <li><a href="#automation">Автоматизация</a></li>
+            <li><a href="#resources">Ресурсы</a></li>
+        </ul>
+        <!-- Ссылки на другие сайты -->
+        <div class="site-links">
+            <a href="index.html" class="site-link">
+                <i class="fas fa-home" aria-hidden="true"></i> Главный сайт
+            </a>
+            <a href="second-site.html" class="site-link secondary">
+                <i class="fas fa-hammer" aria-hidden="true"></i> Строительство
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <main>
+            <!-- Базовые крафты -->
+            <section id="basic-crafts">
+                <h2>Базовые крафты Create</h2>
+                <p>Основные крафты, которые понадобятся вам для начала работы с модом Create.</p>
+                
+                <div class="craft-grid">
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Верстак механика <span class="version-badge">1.16+</span></h3>
+                            <p>Основной рабочий стол для создания большинства механизмов Create.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> 4 железных слитка, 4 деревянные плиты
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Mechanical-Crafter" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Подробное руководство
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-weight-hanging" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Воронка <span class="version-badge">1.16+</span></h3>
+                            <p>Перемещает предметы между инвентарями с помощью кинетической энергии.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> 5 железных слитков, 1 сундук
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Depot" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Использование воронки
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-wind" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Ветряная мельница <span class="version-badge">1.16+</span></h3>
+                            <p>Генерирует кинетическую энергию от ветра. Простой источник энергии.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> 8 палок, 4 белых одеяла
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Windmill-Bearing" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Руководство по энергии
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Кинетические механизмы -->
+            <section id="kinetic-crafts">
+                <h2>Кинетические механизмы</h2>
+                <p>Механизмы для передачи и преобразования кинетической энергии.</p>
+                
+                <div class="craft-grid">
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Шестерни и передачи <span class="version-badge">1.16+</span></h3>
+                            <p>Передают кинетическую энергию между механизмами.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> Деревянные/железные шестерни, валы
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Gears" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Системы передач
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Стрессометр <span class="version-badge">1.16+</span></h3>
+                            <p>Измеряет нагрузку на кинетическую сеть.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> 4 железных слитка, 1 редстоун, 1 стекло
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Stressometer" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Мониторинг нагрузки
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-cogs" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Муфта и сцепление <span class="version-badge">1.16+</span></h3>
+                            <p>Контролируют передачу кинетической энергии.</p>
+                            <div class="craft-ingredients">
+                                <strong>Состав:</strong> Железные слитки, красная пыль
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Clutch-and-Gearshift" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Управление энергией
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Крафты аддонов -->
+            <section id="addon-crafts">
+                <h2>Крафты аддонов Create</h2>
+                <p>Дополнительные механизмы и возможности, предоставляемые популярными аддонами.</p>
+                
+                <div class="craft-grid">
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-train" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Create: Steam 'n' Rails <span class="version-badge">1.18+</span></h3>
+                            <p>Добавляет паровозы и железнодорожные системы.</p>
+                            <div class="craft-ingredients">
+                                <strong>Основные крафты:</strong> Паровозы, рельсы, станции
+                            </div>
+                            <a href="https://www.curseforge.com/minecraft/mc-mods/steam-n-rails" target="_blank" class="resource-button">
+                                <i class="fas fa-download" aria-hidden="true"></i> Скачать аддон
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Create: Crafts & Additions <span class="version-badge">1.18+</span></h3>
+                            <p>Добавляет электрические системы и аккумуляторы.</p>
+                            <div class="craft-ingredients">
+                                <strong>Основные крафты:</strong> Генераторы, двигатели, аккумуляторы
+                            </div>
+                            <a href="https://www.curseforge.com/minecraft/mc-mods/createaddition" target="_blank" class="resource-button">
+                                <i class="fas fa-download" aria-hidden="true"></i> Скачать аддон
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-utensils" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Create: Food <span class="version-badge">1.18+</span></h3>
+                            <p>Расширяет возможности Create в области еды и сельского хозяйства.</p>
+                            <div class="craft-ingredients">
+                                <strong>Основные крафты:</strong> Кухонные механизмы, фермерские системы
+                            </div>
+                            <a href="https://www.curseforge.com/minecraft/mc-mods/create-food" target="_blank" class="resource-button">
+                                <i class="fas fa-download" aria-hidden="true"></i> Скачать аддон
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Другие популярные аддоны:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.curseforge.com/minecraft/mc-mods/create-aeronautics" target="_blank">Create: Aeronautics</a> - воздушные суда и полеты</li>
+                    <li><a href="https://www.curseforge.com/minecraft/mc-mods/create-enchantment-industry" target="_blank">Create: Enchantment Industry</a> - автоматизация зачарований</li>
+                    <li><a href="https://www.curseforge.com/minecraft/mc-mods/create-crystal-clear" target="_blank">Create: Crystal Clear</a> - стеклянные варианты механизмов</li>
+                    <li><a href="https://www.curseforge.com/minecraft/mc-mods/create-stuff-additions" target="_blank">Create Stuff Additions</a> - дополнительные устройства</li>
+                </ul>
+            </section>
+            
+            <!-- Автоматизация -->
+            <section id="automation">
+                <h2>Автоматизация с Create</h2>
+                <p>Создавайте сложные автоматизированные системы для производства и обработки ресурсов.</p>
+                
+                <div class="craft-grid">
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-industry" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Автоматическая ферма <span class="version-badge">1.16+</span></h3>
+                            <p>Система для автоматического выращивания и сбора урожая.</p>
+                            <div class="craft-steps">
+                                <strong>Компоненты:</strong>
+                                <li>Депонитор для посадки</li>
+                                <li>Пластинчатый конвейер для сбора</li>
+                                <li>Воронка для перемещения урожая</li>
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Mechanical-Harvester" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Руководство по фермам
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-cubes" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Сортировочная система <span class="version-badge">1.16+</span></h3>
+                            <p>Автоматическая сортировка предметов по типам.</p>
+                            <div class="craft-steps">
+                                <strong>Компоненты:</strong>
+                                <li>Конвейерные ленты</li>
+                                <li>Умные воронки с фильтрами</li>
+                                <li>Депо для хранения</li>
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Item-Drain" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Системы сортировки
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="craft-card">
+                        <div class="craft-image">
+                            <i class="fas fa-water" aria-hidden="true"></i>
+                        </div>
+                        <div class="craft-content">
+                            <h3>Система жидкостей <span class="version-badge">1.16+</span></h3>
+                            <p>Автоматическое управление жидкостями и их перемещение.</p>
+                            <div class="craft-steps">
+                                <strong>Компоненты:</strong>
+                                <li>Насосы для перемещения</li>
+                                <li>Резервуары для хранения</li>
+                                <li>Клапаны для контроля потока</li>
+                            </div>
+                            <a href="https://github.com/Creators-of-Create/Create/wiki/Fluid-Pipe" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Работа с жидкостями
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Ресурсы -->
+            <section id="resources">
+                <h2>Полезные ресурсы</h2>
+                <p>Дополнительные материалы и сообщества для изучения Create.</p>
+                
+                <div class="featured-resource">
+                    <h3>Официальные ресурсы Create</h3>
+                    <p>Все необходимое для освоения мода в одном месте</p>
+                    <div class="button-container">
+                        <a href="https://github.com/Creators-of-Create/Create/wiki" target="_blank" class="resource-button">
+                            <i class="fas fa-book" aria-hidden="true"></i> Официальная вики
+                        </a>
+                        <a href="https://www.curseforge.com/minecraft/mc-mods/create" target="_blank" class="resource-button">
+                            <i class="fas fa-download" aria-hidden="true"></i> CurseForge
+                        </a>
+                        <a href="https://discord.gg/h7DszS3d" target="_blank" class="resource-button">
+                            <i class="fab fa-discord" aria-hidden="true"></i> Discord сообщество
+                        </a>
+                    </div>
+                </div>
+                
+                <h3>Обучающие материалы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.youtube.com/playlist?list=PLx3k0RGeXZ_zs3hUuq4p_I5QEtKF2tDz_" target="_blank">Официальный туториал по Create</a> - плейлист на YouTube</li>
+                    <li><a href="https://www.youtube.com/c/RagePlaysGames/search?query=create" target="_blank">RagePlaysGames</a> - подробные обзоры механизмов</li>
+                    <li><a href="https://www.youtube.com/c/TangoTek/search?query=create" target="_blank">Tango Tek</a> - сложные проекты на Create</li>
+                    <li><a href="https://www.youtube.com/c/Direwolf20/search?query=create" target="_blank">Direwolf20</a> - обзоры и способы применения</li>
+                </ul>
+                
+                <h3>Популярные сборки с Create:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.curseforge.com/minecraft/modpacks/create-above-and-beyond" target="_blank">Create: Above & Beyond</a> - официальный экспертный пакет</li>
+                    <li><a href="https://www.curseforge.com/minecraft/modpacks/create-astral" target="_blank">Create: Astral</a> - фантастическая сборка</li>
+                    <li><a href="https://www.curseforge.com/minecraft/modpacks/create-simply-technological" target="_blank">Create: Simply Technological</a> - технологическая сборка</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Футер -->
+    <footer>
+        <p>© 2023 Create Mod Guide. Неофициальный фанатский ресурс.</p>
+        <p>Minecraft и Create Mod являются зарегистрированными торговыми марками их соответствующих владельцев.</p>
+        <p style="font-size: 0.8rem; margin-top: 1rem;">Все ссылки ведут на официальные и проверенные ресурсы.</p>
+    </footer>
+</body>
+</html>
