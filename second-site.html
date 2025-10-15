@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Строительство - Подробные гайды и инструкции</title>
+    <meta name="description" content="Проверенные руководства по строительству в Minecraft: дома, замки, механизмы и многое другое">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to bottom, #5a3921, #7a5c3c);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect fill="%235a3921" width="50" height="50"/><rect fill="%235a3921" x="50" y="50" width="50" height="50"/><rect fill="%237a5c3c" x="50" width="50" height="50"/><rect fill="%237a5c3c" y="50" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 0 #1a1a1a;
+            color: #fff;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #e6c8a0;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        nav {
+            background-color: #2d2d2d;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: #e6c8a0;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a:focus {
+            background-color: #5a3921;
+            color: white;
+            outline: 2px solid #e6c8a0;
+        }
+        
+        /* Контейнер для ссылок на другие сайты */
+        .site-links {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .site-link {
+            background: linear-gradient(135deg, #7ed957, #3a7d34);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 0 #2d5c29;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .site-link.secondary {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            box-shadow: 0 4px 0 #34495e;
+        }
+        
+        .site-link:hover, .site-link:focus {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0;
+            outline: 2px solid #fff;
+        }
+        
+        .site-link.secondary:hover {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background-color: #2d2d2d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            color: #e6c8a0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #5a3921;
+            font-size: 2rem;
+        }
+        
+        .building-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .building-card {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .building-card:hover, .building-card:focus-within {
+            transform: translateY(-5px);
+        }
+        
+        .building-image {
+            height: 200px;
+            background: linear-gradient(135deg, #5a3921, #7a5c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #e6c8a0;
+        }
+        
+        .building-content {
+            padding: 1.5rem;
+        }
+        
+        .building-content h3 {
+            color: #e6c8a0;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-button {
+            display: inline-block;
+            background-color: #e6c8a0;
+            color: #1a1a1a;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 #5a3921;
+            margin-top: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .resource-button:hover, .resource-button:focus {
+            background-color: #d4b68c;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #5a3921;
+            outline: 2px solid #fff;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .featured-resource {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .featured-resource h3 {
+            color: #e6c8a0;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .site-links {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        .resource-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .resource-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-list a {
+            color: #e6c8a0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-list a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-content">
+            <h1>MINECRAFT СТРОИТЕЛЬСТВО</h1>
+            <p class="tagline">Проверенные руководства и ресурсы для строительства в Minecraft</p>
+        </div>
+    </header>
+    
+    <!-- Навигация -->
+    <nav>
+        <ul>
+            <li><a href="#houses">Дома</a></li>
+            <li><a href="#castles">Замки</a></li>
+            <li><a href="#redstone">Редстоун</a></li>
+            <li><a href="#tutorials">Гайды</a></li>
+            <li><a href="#inspiration">Вдохновение</a></li>
+            <!-- НОВАЯ ССЫЛКА НА CREATE -->
+            <li><a href="create.html">Мод Create</a></li>
+        </ul>
+        <!-- Ссылки на другие сайты -->
+        <div class="site-links">
+            <a href="index.html" class="site-link">
+                <i class="fas fa-home" aria-hidden="true"></i> Главный сайт
+            </a>
+            <a href="create.html" class="site-link secondary">
+                <i class="fas fa-cogs" aria-hidden="true"></i> Create Mod
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <main>
+            <!-- Дома -->
+            <section id="houses">
+                <h2>Идеи для домов</h2>
+                <p>От маленьких хижин до роскошных особняков - найдите вдохновение для своего идеального дома в Minecraft.</p>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Современный дом</h3>
+                            <p>Стильный и минималистичный дом с использованием кварца, стекла и бетона.</p>
+                            <a href="https://www.youtube.com/watch?v=4T8-_dS0fG4" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Видео-гайд
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-tree" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Дом на дереве</h3>
+                            <p>Уютное жилище среди ветвей, идеально подходящее для лесного биома.</p>
+                            <a href="https://minecraft.fandom.com/wiki/Tutorials/Treehouse" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Подробное руководство
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-mountain" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Подземное убежище</h3>
+                            <p>Надежный дом, встроенный в гору или под землей, с системой скрытых входов.</p>
+                            <a href="https://www.minecraft.net/ru-ru/article/underground-base-ideas" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Идеи от Minecraft
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Дополнительные ресурсы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.planetminecraft.com/projects/tag/house/" target="_blank">Коллекция домов на Planet Minecraft</a></li>
+                    <li><a href="https://www.youtube.com/playlist?list=PL5kGYXRS_Mu2mD5rvj3kMZRKjI1WJ1VK2" target="_blank">Плейлист с домами на YouTube</a></li>
+                    <li><a href="https://minecraft.fandom.com/wiki/Tutorials/Houses" target="_blank">Официальные руководства по домам</a></li>
+                </ul>
+            </section>
+            
+            <!-- Замки -->
+            <section id="castles">
+                <h2>Величественные замки</h2>
+                <p>Постройте впечатляющие замки и крепости, которые станут центром вашего мира Minecraft.</p>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-chess-rook" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Средневековый замок</h3>
+                            <p>Классический каменный замок с высокими стенами, башнями и подъемным мостом.</p>
+                            <a href="https://www.youtube.com/watch?v=7EUXdw3tDVc" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Пошаговое строительство
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-fort-awesome" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Фэнтезийная крепость</h3>
+                            <p>Волшебный замок с элементами фэнтези, парящими островами и магическими деталями.</p>
+                            <a href="https://www.planetminecraft.com/projects/tag/fantasy/" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Готовые проекты
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-dungeon" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Подземная цитадель</h3>
+                            <p>Многоуровневая подземная крепость с лабиринтами, ловушками и сокровищницами.</p>
+                            <a href="https://minecraft.fandom.com/wiki/Tutorials/Defensive_structures" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Руководство по защите
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Дополнительные ресурсы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.minecraft.net/ru-ru/article/castle-build-ideas" target="_blank">Идеи для замков от Minecraft</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=KZ6jb2YOy_c" target="_blank">Строительство замка с нуля</a></li>
+                    <li><a href="https://www.curseforge.com/minecraft/texture-packs/medieval-craft" target="_blank">Текстурпак для средневекового стиля</a></li>
+                </ul>
+            </section>
+            
+            <!-- Редстоун -->
+            <section id="redstone">
+                <h2>Редстоун механизмы</h2>
+                <p>Создавайте сложные механизмы с помощью редстоуна - от простых дверей до полностью автоматизированных ферм.</p>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-door-open" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Секретные входы</h3>
+                            <p>Скрытые двери, активируемые рычагами, нажимными плитами или редстоун-факелами.</p>
+                            <a href="https://www.youtube.com/watch?v=Y8-4SBaEshI" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> 10 видов скрытых дверей
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-tractor" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Автоматические фермы</h3>
+                            <p>Системы для автоматического сбора урожая, разведения животных и многого другого.</p>
+                            <a href="https://minecraft.fandom.com/wiki/Tutorials/Automatic_farming" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Руководство по фермам
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-gamepad" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Мини-игры</h3>
+                            <p>Создавайте собственные мини-игры с использованием редстоун-механизмов.</p>
+                            <a href="https://www.youtube.com/playlist?list=PL5kGYXRS_Mu1eFulxL_kCkS5nnlO5Y8iO" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Мини-игры на редстоуне
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Дополнительные ресурсы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://minecraft.fandom.com/wiki/Redstone" target="_blank">Официальная вики по редстоуну</a></li>
+                    <li><a href="https://www.youtube.com/c/mumbojumbo/playlists" target="_blank">Канал Mumbo Jumbo - редстоун эксперта</a></li>
+                    <li><a href="https://www.redstonehub.net/" target="_blank">Redstone Hub - сообщество редстоунеров</a></li>
+                </ul>
+            </section>
+            
+            <!-- Гайды -->
+            <section id="tutorials">
+                <h2>Подробные гайды</h2>
+                <p>Пошаговые инструкции для строительства различных сооружений в Minecraft.</p>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-vial" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Лаборатория зельеварения</h3>
+                            <p>Создайте полнофункциональную лабораторию для создания всех видов зелий.</p>
+                            <a href="https://minecraft.fandom.com/wiki/Tutorials/Brewing_guide" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Гайд по зельеварения
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Библиотека зачарований</h3>
+                            <p>Постройте идеальную библиотеку для максимального уровня зачарований.</p>
+                            <a href="https://www.youtube.com/watch?v=Y7K4rkxVr0I" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Оптимальная библиотека
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-ship" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Корабль в бутылке</h3>
+                            <p>Создайте детализированный корабль внутри стеклянной конструкции.</p>
+                            <a href="https://www.planetminecraft.com/project/ship-in-a-bottle-4542438/" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Готовый проект
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Дополнительные ресурсы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://minecraft.fandom.com/wiki/Tutorials" target="_blank">Все руководства на официальной вики</a></li>
+                    <li><a href="https://www.minecraft.net/ru-ru/category/updates/builds" target="_blank">Официальные гайды от Minecraft</a></li>
+                    <li><a href="https://www.youtube.com/c/Grian/playlists" target="_blank">Канал Grian - мастера строительства</a></li>
+                </ul>
+            </section>
+            
+            <!-- Вдохновение -->
+            <section id="inspiration">
+                <h2>Источники вдохновения</h2>
+                <p>Черпайте идеи из реальной архитектуры и других творческих проектов Minecraft.</p>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-landmark" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Историческая архитектура</h3>
+                            <p>Воссоздайте знаменитые здания и сооружения из реального мира.</p>
+                            <a href="https://www.planetminecraft.com/projects/tag/real-life/" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Реалистичные постройки
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-film" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Кинематографические постройки</h3>
+                            <p>Создавайте локации из ваших любимых фильмов и сериалов.</p>
+                            <a href="https://www.planetminecraft.com/projects/tag/movie/" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Постройки из фильмов
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-image">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                        </div>
+                        <div class="building-content">
+                            <h3>Сообщество строителей</h3>
+                            <p>Откройте для себя работы других талантливых строителей Minecraft.</p>
+                            <a href="https://www.planetminecraft.com/community/" target="_blank" class="resource-button">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Сообщество Planet Minecraft
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Дополнительные ресурсы:</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.reddit.com/r/Minecraftbuilds/" target="_blank">Сообщество строителей на Reddit</a></li>
+                    <li><a href="https://www.instagram.com/explore/tags/minecraftbuilds/" target="_blank">Постройки в Instagram</a></li>
+                    <li><a href="https://www.pinterest.com/search/pins/?q=minecraft%20builds" target="_blank">Идеи на Pinterest</a></li>
+                </ul>
+            </section>
+            
+            <!-- Рекомендуемые ресурсы -->
+            <div class="featured-resource">
+                <h3>Лучшие ресурсы для строительства в Minecraft</h3>
+                <p>Мы собрали самые полезные сайты и каналы, которые помогут вам стать мастером строительства:</p>
+                <div class="button-container">
+                    <a href="https://minecraft.fandom.com/wiki/Tutorials/Building" target="_blank" class="resource-button">
+                        <i class="fas fa-book" aria-hidden="true"></i> Официальные руководства
+                    </a>
+                    <a href="https://www.planetminecraft.com/" target="_blank" class="resource-button">
+                        <i class="fas fa-globe" aria-hidden="true"></i> Planet Minecraft
+                    </a>
+                    <a href="https://www.youtube.com/c/Grian" target="_blank" class="resource-button">
+                        <i class="fab fa-youtube" aria-hidden="true"></i> Grian - строительство
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Футер -->
+    <footer>
+        <p>© 2023 Minecraft Строительство. Фанатский ресурс о строительстве в Minecraft.</p>
+        <p>Minecraft является зарегистрированной торговой маркой Mojang Studios.</p>
+        <p style="font-size: 0.8rem; margin-top: 1rem;">Все ссылки ведут на официальные и проверенные ресурсы по Minecraft.</p>
+    </footer>
+</body>
+</html>
