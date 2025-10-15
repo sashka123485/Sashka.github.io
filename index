@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft - Мир бесконечных возможностей</title>
+    <meta name="description" content="Официальный фанатский сайт Minecraft. Узнайте все о геймплее, мирах, существах и многом другом.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        /* Улучшение доступности: увеличенный контраст и размер шрифта по умолчанию */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Стили для шапки */
+        header {
+            background: linear-gradient(to bottom, #3a7d34, #2d5c29);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect fill="%233a7d34" width="50" height="50"/><rect fill="%233a7d34" x="50" y="50" width="50" height="50"/><rect fill="%232d5c29" x="50" width="50" height="50"/><rect fill="%232d5c29" y="50" width="50" height="50"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 0 #1a1a1a;
+            color: #fff;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8e994;
+            margin-bottom: 1rem;
+        }
+        
+        /* Навигация */
+        nav {
+            background-color: #2d2d2d;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: #7ed957;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a:focus {
+            background-color: #3a7d34;
+            color: white;
+            outline: 2px solid #7ed957;
+        }
+        
+        /* Контейнер для ссылок на другие сайты */
+        .site-links {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .site-link {
+            background: linear-gradient(135deg, #e6c8a0, #5a3921);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 0 #7a5c3c;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .site-link.secondary {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            box-shadow: 0 4px 0 #34495e;
+        }
+        
+        .site-link:hover, .site-link:focus {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0;
+            outline: 2px solid #fff;
+        }
+        
+        .site-link.secondary:hover {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+        }
+        
+        /* Пропуск навигации для пользователей клавиатуры */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #7ed957;
+            color: #1a1a1a;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background-color: #2d2d2d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            color: #7ed957;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3a7d34;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Блоки с информацией */
+        .info-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .info-card {
+            background-color: #3a3a3a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card:hover, .info-card:focus-within {
+            transform: translateY(-5px);
+        }
+        
+        .info-card h3 {
+            color: #7ed957;
+            margin-bottom: 1rem;
+        }
+        
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-item {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+        
+        .gallery-item::before {
+            content: "";
+            display: block;
+            padding-top: 100%;
+        }
+        
+        .gallery-item div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .site-links {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        /* Улучшение доступности: увеличение размера текста для мобильных устройств */
+        @media (max-width: 480px) {
+            body {
+                font-size: 18px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Специальные элементы Minecraft */
+        .minecraft-block {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #7ed957;
+            margin: 0 5px;
+            transform: skew(-5deg);
+        }
+        
+        .minecraft-button {
+            display: inline-block;
+            background-color: #7ed957;
+            color: #1a1a1a;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 #3a7d34;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .minecraft-button:hover, .minecraft-button:focus {
+            background-color: #6bc048;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #3a7d34;
+            outline: 2px solid #fff;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .clickbait-button {
+            background: linear-gradient(135deg, #ff8a00, #e52e71);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 #b71540;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+            min-width: 250px;
+            justify-content: center;
+        }
+        
+        .clickbait-button:hover, .clickbait-button:focus {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b71540;
+            background: linear-gradient(135deg, #e52e71, #ff8a00);
+            outline: 2px solid #fff;
+        }
+        
+        .clickbait-button.secondary {
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            box-shadow: 0 6px 0 #005f83;
+        }
+        
+        .clickbait-button.secondary:hover, .clickbait-button.secondary:focus {
+            box-shadow: 0 3px 0 #005f83;
+            background: linear-gradient(135deg, #0083b0, #00b4db);
+        }
+        
+        .clickbait-button.tertiary {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            box-shadow: 0 6px 0 #0a6b5e;
+        }
+        
+        .clickbait-button.tertiary:hover, .clickbait-button.tertiary:focus {
+            box-shadow: 0 3px 0 #0a6b5e;
+            background: linear-gradient(135deg, #38ef7d, #11998e);
+        }
+        
+        .featured {
+            border-left: 5px solid #e52e71;
+            padding-left: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+        
+        .cat-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 0 #e66465;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .cat-button:hover, .cat-button:focus {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #e66465;
+            background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
+            animation: none;
+            outline: 2px solid #333;
+        }
+        
+        .telegram-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0088cc, #00a8e8);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 #006699;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+            min-width: 250px;
+            justify-content: center;
+            margin: 1rem;
+        }
+        
+        .telegram-button:hover, .telegram-button:focus {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #006699;
+            background: linear-gradient(135deg, #00a8e8, #0088cc);
+            outline: 2px solid #fff;
+        }
+        
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 #6c3483;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-align: center;
+            justify-content: center;
+            margin: 1rem;
+        }
+        
+        .download-button:hover, .download-button:focus {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #6c3483;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            outline: 2px solid #fff;
+        }
+        
+        .mods-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 #219653;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-align: center;
+            justify-content: center;
+            margin: 1rem;
+        }
+        
+        .mods-button:hover, .mods-button:focus {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #219653;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            outline: 2px solid #fff;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .cat-section {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            padding: 3rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 3rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .cat-section h2 {
+            color: #333;
+            border-bottom: 2px solid #e66465;
+        }
+        
+        .cat-section p {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .downloads-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 3rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .downloads-section h2 {
+            color: white;
+            border-bottom: 2px solid #5a6fd8;
+        }
+        
+        .downloads-section p {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Улучшение доступности: скрытие элементов только визуально */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Улучшение доступности: увеличение области клика для кнопок */
+        button, a {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        /* Улучшение доступности: фокус для элементов ввода */
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid #7ed957;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Пропуск навигации для пользователей клавиатуры -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+    
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-content">
+            <h1>MINECRAFT</h1>
+            <p class="tagline">Открой мир бесконечных возможностей! <span class="highlight">Новые секреты и гайды внутри!</span></p>
+            <!-- ОБНОВЛЕННАЯ ССЫЛКА -->
+            <a href="https://dl.legacylauncher.ru/legacy/installer" target="_blank" class="minecraft-button">
+                <i class="fas fa-download" aria-hidden="true"></i> Скачать Minecraft
+            </a>
+        </div>
+    </header>
+    
+    <!-- Навигация -->
+    <nav>
+        <ul>
+            <li><a href="#about">О Minecraft</a></li>
+            <li><a href="#gameplay">Геймплей</a></li>
+            <li><a href="#worlds">Миры</a></li>
+            <li><a href="#creatures">Существа</a></li>
+            <li><a href="#downloads">Загрузки</a></li>
+            <li><a href="#gallery">Галерея</a></li>
+            <!-- НОВАЯ ССЫЛКА НА CREATE -->
+            <li><a href="create.html">Мод Create</a></li>
+        </ul>
+        <!-- Ссылки на другие сайты -->
+        <div class="site-links">
+            <a href="second-site.html" class="site-link">
+                <i class="fas fa-hammer" aria-hidden="true"></i> Строительство
+            </a>
+            <a href="create.html" class="site-link secondary">
+                <i class="fas fa-cogs" aria-hidden="true"></i> Create Mod
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <main id="main-content">
+            <!-- О Minecraft -->
+            <section id="about">
+                <h2>О Minecraft</h2>
+                <p>Minecraft — это песочница с элементами выживания, созданная компанией Mojang Studios. Игра позволяет игрокам строить и разрушать различные блоки в трехмерном окружении.</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">СЕКРЕТ:</span> Знаете ли вы, что в Minecraft есть скрытые достижения, о которых не знает 95% игроков?</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://minecraft.fandom.com/ru/wiki/Minecraft" target="_blank" class="clickbait-button">
+                        <i class="fas fa-gem" aria-hidden="true"></i> Узнать все секреты Minecraft
+                    </a>
+                    <a href="https://minecraft.fandom.com/ru/wiki/Достижения" target="_blank" class="clickbait-button secondary">
+                        <i class="fas fa-trophy" aria-hidden="true"></i> Скрытые достижения
+                    </a>
+                </div>
+                
+                <div class="info-blocks">
+                    <div class="info-card">
+                        <h3>Создано Mojang</h3>
+                        <p>Minecraft была создана Маркусом Перссоном и позже разработана Mojang Studios, которая была приобретена Microsoft в 2014 году.</p>
+                        <a href="https://www.minecraft.net/ru-ru/about-minecraft" target="_blank" class="minecraft-button">История игры</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Более 200 млн копий</h3>
+                        <p>Minecraft стала самой продаваемой видеоигрой в истории, с более чем 200 миллионами проданных копий по всему миру.</p>
+                        <a href="https://www.guinnessworldrecords.com/world-records/best-selling-video-game" target="_blank" class="minecraft-button">Рекорды</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Кроссплатформенность</h3>
+                        <p>Игра доступна на множестве платформ, включая ПК, консоли и мобильные устройства, с возможностью кроссплатформенной игры.</p>
+                        <a href="https://www.minecraft.net/ru-ru/platforms" target="_blank" class="minecraft-button">Все платформы</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Геймплей -->
+            <section id="gameplay">
+                <h2>Геймплей</h2>
+                <p>Основной геймплей Minecraft вращается вокруг размещения и разрушения блоков. Мир состоит из блоков, представляющих различные материалы, такие как земля, камень, руды, дерево и вода.</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">ЛУЧШИЕ СОВЕТЫ:</span> Профессиональные игроки раскрыли стратегии, которые ускорят ваш прогресс в 3 раза!</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://minecraft.fandom.com/ru/wiki/Руководства" target="_blank" class="clickbait-button tertiary">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i> Стать профессионалом за 7 дней
+                    </a>
+                    <a href="https://minecraft.fandom.com/ru/wiki/Игровой_процесс" target="_blank" class="clickbait-button">
+                        <i class="fas fa-play-circle" aria-hidden="true"></i> Геймплейные секреты
+                    </a>
+                </div>
+                
+                <div class="info-blocks">
+                    <div class="info-card">
+                        <h3>Режим выживания</h3>
+                        <p>Игроки должны собирать ресурсы, строить укрытия, сражаться с мобами и управлять своим здоровьем и голодом.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Выживание" target="_blank" class="minecraft-button">Советы по выживанию</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Творческий режим</h3>
+                        <p>Игроки имеют неограниченные ресурсы, могут летать и не получают урона, что позволяет свободно строить масштабные проекты.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Творчество" target="_blank" class="minecraft-button">Идеи для строительства</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Приключенческий режим</h3>
+                        <p>Предназначен для пользовательских карт, где игроки не могут размещать или разрушать блоки, чтобы следовать задумке автора.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Приключение" target="_blank" class="minecraft-button">Лучшие карты</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Миры -->
+            <section id="worlds">
+                <h2>Миры Minecraft</h2>
+                <p>Minecraft генерирует бесконечные миры, состоящие из различных биомов, таких как леса, пустыни, горы, океаны и многое другое.</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">ТАЙНЫЕ ЛОКАЦИИ:</span> Мы нашли редкие биомы, которые встречаются только в 0.01% миров!</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://minecraft.fandom.com/ru/wiki/Биом" target="_blank" class="clickbait-button secondary">
+                        <i class="fas fa-map" aria-hidden="true"></i> Найти редкие биомы
+                    </a>
+                    <a href="https://minecraft.fandom.com/ru/wiki/Измерения" target="_blank" class="clickbait-button">
+                        <i class="fas fa-door-open" aria-hidden="true"></i> Тайные порталы
+                    </a>
+                </div>
+                
+                <div class="info-blocks">
+                    <div class="info-card">
+                        <h3>Обычный мир</h3>
+                        <p>Стандартный мир с разнообразными биомами, пещерами, деревнями и другими структурами.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Верхний_мир" target="_blank" class="minecraft-button">Исследовать мир</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Незер</h3>
+                        <p>Мрачное измерение, наполненное опасными мобами, уникальными ресурсами и крепостями.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Незер" target="_blank" class="minecraft-button">Выжить в Незере</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Энд</h3>
+                        <p>Таинственное измерение, где игрок может сразиться с главным боссом игры - Эндер Драконом.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Энд" target="_blank" class="minecraft-button">Победить дракона</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Существа -->
+            <section id="creatures">
+                <h2>Существа Minecraft</h2>
+                <p>В Minecraft обитают различные существа, известные как "мобы". Они делятся на дружелюбных, нейтральных и враждебных.</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">СЕКРЕТНЫЕ МОБЫ:</span> Откройте существ, которых видели менее 1% игроков!</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://minecraft.fandom.com/ru/wiki/Мобы" target="_blank" class="clickbait-button tertiary">
+                        <i class="fas fa-dragon" aria-hidden="true"></i> Встретить всех мобов
+                    </a>
+                    <a href="https://minecraft.fandom.com/ru/wiki/Разведение" target="_blank" class="clickbait-button">
+                        <i class="fas fa-heart" aria-hidden="true"></i> Секреты разведения
+                    </a>
+                </div>
+                
+                <div class="info-blocks">
+                    <div class="info-card">
+                        <h3>Дружелюбные мобы</h3>
+                        <p>Коровы, свиньи, овцы, куры и другие животные, которых можно разводить для получения ресурсов.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Мобы#Дружелюбные_мобы" target="_blank" class="minecraft-button">Все дружелюбные мобы</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Нейтральные мобы</h3>
+                        <p>Эндермены, пчелы, волки и другие существа, которые атакуют только в ответ на провокацию.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Мобы#Нейтральные_мобы" target="_blank" class="minecraft-button">Все нейтральные мобы</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Враждебные мобы</h3>
+                        <p>Зомби, скелеты, криперы и другие опасные существа, атакующие игрока при встрече.</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Мобы#Враждебные_мобы" target="_blank" class="minecraft-button">Все враждебные мобы</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Загрузки -->
+            <section id="downloads" class="downloads-section">
+                <h2>Загрузки и моды</h2>
+                <p>Улучшите свой игровой опыт с помощью специального лаунчера и интересных модов!</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">ВАЖНО:</span> Скачайте лаунчер для удобной игры и установите моды для расширения возможностей Minecraft!</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://dl.legacylauncher.ru/legacy/installer" target="_blank" class="download-button">
+                        <i class="fas fa-download" aria-hidden="true"></i> Скачать лаунчер
+                    </a>
+                    <a href="https://disk.yandex.ru/d/v7z8RUY6sbcTIw" target="_blank" class="mods-button">
+                        <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Скачать моды
+                    </a>
+                </div>
+                
+                <div class="info-blocks">
+                    <div class="info-card">
+                        <h3>Лаунчер Legacy</h3>
+                        <p>Удобный лаунчер для Minecraft с поддержкой разных версий игры, простой установкой и настройкой.</p>
+                        <a href="https://dl.legacylauncher.ru/legacy/installer" target="_blank" class="minecraft-button">Скачать сейчас</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Коллекция модов</h3>
+                        <p>Большая подборка популярных модов для Minecraft, которые добавят новые предметы, существа и возможности в игру.</p>
+                        <a href="https://disk.yandex.ru/d/v7z8RUY6sbcTIw" target="_blank" class="minecraft-button">Посмотреть моды</a>
+                    </div>
+                    <div class="info-card">
+                        <h3>Установка модов</h3>
+                        <p>Простая инструкция по установке модов в Minecraft. Всего несколько шагов - и игра станет интереснее!</p>
+                        <a href="https://minecraft.fandom.com/ru/wiki/Руководство_по_установке_модов" target="_blank" class="minecraft-button">Инструкция</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Галерея -->
+            <section id="gallery">
+                <h2>Галерея Minecraft</h2>
+                <p>Взгляните на разнообразие миров и творений, которые можно создать в Minecraft!</p>
+                
+                <div class="featured">
+                    <p><span class="highlight">ПОТРЯСАЮЩИЕ ПОСТРОЙКИ:</span> Мы собрали лучшие творения, которые вас удивят!</p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://www.minecraft.net/ru-ru/gallery" target="_blank" class="clickbait-button">
+                        <i class="fas fa-images" aria-hidden="true"></i> Посмотреть лучшие постройки
+                    </a>
+                    <a href="https://minecraft.fandom.com/ru/wiki/Учебные_пособия/Строения" target="_blank" class="clickbait-button secondary">
+                        <i class="fas fa-hard-hat" aria-hidden="true"></i> Научиться строить как профи
+                    </a>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <div style="background-color: #7ed957;" aria-label="Зеленый блок Minecraft"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div style="background-color: #3a7d34;" aria-label="Темно-зеленый блок Minecraft"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div style="background-color: #2d5c29;" aria-label="Очень темно-зеленый блок Minecraft"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div style="background-color: #5a3921;" aria-label="Коричневый блок Minecraft"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div style="background-color: #7a5c3c;" aria-label="Светло-коричневый блок Minecraft"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div style="background-color: #9d9d9d;" aria-label="Серый блок Minecraft"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция с котами -->
+            <section class="cat-section">
+                <h2>Устали от блоков и монстров?</h2>
+                <p>Перезагрузитесь с милыми котиками! Нажмите на кнопку ниже, чтобы перейти в мир умиления и мурлыкания.</p>
+                
+                <a href="https://www.reddit.com/r/cats/" target="_blank" class="cat-button">
+                    <i class="fas fa-paw" aria-hidden="true"></i> Перейти к котикам!
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                </a>
+                
+                <p>Там вас ждут самые милые, смешные и трогательные фото и видео с котами!</p>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Футер -->
+    <footer>
+        <p>© 2023 Сайт о Minecraft. Неофициальный фанатский ресурс.</p>
+        <p>Minecraft является зарегистрированной торговой маркой Mojang Studios.</p>
+        <div class="button-container">
+            <a href="https://www.minecraft.net/ru-ru" target="_blank" class="clickbait-button">
+                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Официальный сайт Minecraft
+            </a>
+            <a href="https://t.me/CreateNrails" target="_blank" class="telegram-button">
+                <i class="fab fa-telegram" aria-hidden="true"></i> Наш Telegram-канал
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
